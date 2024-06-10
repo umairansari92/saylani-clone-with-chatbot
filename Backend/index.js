@@ -9,14 +9,16 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+// Create a transporter object using SMTP transport
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
-  }
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'your-email@gmail.com', // Your Gmail email address
+        pass: 'your-password' // Your Gmail password or app-specific password
+    }
 });
-
 // Middleware to log request data
 app.use((req, res, next) => {
   console.log(`Received request: ${req.method} ${req.url}`);
